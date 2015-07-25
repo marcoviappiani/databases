@@ -6,19 +6,19 @@ var bluebird = require('bluebird');
 module.exports = {
   messages: {
     // a function which handles a get request for all messages
-    get: function (req, res) {
+    get: function (req, res, callback) {
       console.log('-[ CONTROLLER ]-> GET to MESSAGES table');
-      models.messages.get(req, res);
+      models.messages.get(req, res, callback);
     }, 
     // a function which handles posting a message to the database
-    post: function (req, res) {
+    post: function (req, res, callback) {
       console.log('-[ CONTROLLER ]-> POST to MESSAGES table');
 
       var username = req.body.username;
       var roomname = req.body.roomname;
       var message = req.body.message;
-      
-      models.messages.post(req.body, res);
+
+      models.messages.post(username, roomname, message, callback);
     } 
   },
 
