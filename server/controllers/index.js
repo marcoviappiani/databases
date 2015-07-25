@@ -1,18 +1,25 @@
 var models = require('../models');
 var bluebird = require('bluebird');
-var utils = require('../utils');
+// var utils = require('../utils');
 
 
 module.exports = {
   messages: {
+    // a function which handles a get request for all messages
     get: function (req, res) {
       console.log('-[ CONTROLLER ]-> GET to MESSAGES table');
       models.messages.get(req, res);
-    }, // a function which handles a get request for all messages
+    }, 
+    // a function which handles posting a message to the database
     post: function (req, res) {
       console.log('-[ CONTROLLER ]-> POST to MESSAGES table');
-      models.messages.post(req, res);
-    } // a function which handles posting a message to the database
+
+      var username = req.body.username;
+      var roomname = req.body.roomname;
+      var message = req.body.message;
+      
+      models.messages.post(req.body, res);
+    } 
   },
 
   users: {
@@ -21,9 +28,11 @@ module.exports = {
       console.log('-[ CONTROLLER ]-> GET to USERS table');
       models.users.get(req, res);
     },
-    post: function (req, res) {
+    post: function (req, res, callback) {
       console.log('-[ CONTROLLER ]-> POST to USERS table');
-      models.users.post( req.body.username );
+      console.log('params:', req.params);
+
+      models.users.post(req.body.username, callback);
     }
   }
 };

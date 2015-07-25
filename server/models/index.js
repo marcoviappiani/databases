@@ -24,12 +24,9 @@ module.exports = {
         console.log(results);
       });      
     },
-    post: function (username) {
+    post: function (username, callback) {
       console.log('-[ MODEL ]-> POST to USERS table');
-      db.query("INSERT into users (username) VALUES ('" + username + "')");
-      // db.query("SELECT * from users", [], function(err, results){
-      //   console.log(results);
-      // });   
+      db.query("INSERT into users (username) VALUES ('" + username + "')", [], callback);
     }
   }
 };
