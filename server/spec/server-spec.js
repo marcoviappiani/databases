@@ -71,7 +71,6 @@ describe("Persistent Node Chat Server", function() {
 
     dbConnection.query(queryString, queryArgs, function(err) {
       if (err) { throw err; }
-
       // Now query the Node chat server and see if it returns
       // the message we just inserted:
       request("http://127.0.0.1:3000/classes/messages", function(error, response, body) {
